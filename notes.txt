@@ -1,0 +1,101 @@
+##Installation- 
+
+```
+sudo apt update -y
+
+sudo apt install openjdk-11-jdk -y
+or
+sudo apt install openjdk-8-jdk -y
+
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+
+sudo apt-get update
+
+sudo apt-get install jenkins -y
+
+systemctl status jenkins
+
+cat /var/lib/jenkins/secrets/initialAdminPassword
+
+id jenkins
+```
+
+##JDK Plugin
+
+Add jdk NAME - 
+OracleJDK11
+
+JAVA_HOME - 
+/usr/lib/jvm/java-1.11.0-openjdk-amd64
+
+or
+
+Add jdk NAME - 
+OracleJDK8
+
+JAVA_HOME - 
+/usr/lib/jvm/java-1.8.0-openjdk-amd64
+
+
+##Create a job
+
+	1. Give a name
+	2. Select Item type
+	3. add build steps or necessary options
+	4. if want to run some commands use execute shell commands
+	5. Put you commands in the command box, save and apply
+	6. build now
+
+
+##Build maven project
+
+	1. Create a job
+	2. select JDK provided by your jenkins system tools which will work on your project
+	3. select git repo, enter repo url, select branch to build */main
+	4. in build steps, select Invoke top-level Maven targets 
+	5. MAVEN3 in version
+	6. Goals - clean install
+	7. apply and save
+
+in build steps you can also do versioning
+execute shell
+
+Post Build Actions
+	- Archive the artifacts
+	- **/*.war -> ** means check in every folder and find any file name with .war
+
+
+##Versioning
+
+# manually
+in build steps you can also do versioning
+execute shell
+
+mkdir -p versions
+cp target/vprofile-v2.war versions/vprofile-V$BUILD_ID.war
+
+--or create your own version by add 
+This project is parameterized
+put your variable name lets say VERSION
+
+mkdir -p versions
+cp target/vprofile-v2.war versions/vprofile-V$VERSION.war
+
+# via plugin
+
+use zentimestamp
+
+in configure
+check - Change date pattern for the BUILD_TIMESTAMP (build timestamp) variable
+yy-MM-dd:HH-mm
+	
+execute shell
+mkdir -p versions
+cp target/vprofile-v2.war versions/vprofile-V$BUILD_ID-$BUILD_TIMESTAMP.war
+	
+
