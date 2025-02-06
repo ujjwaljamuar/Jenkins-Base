@@ -2,7 +2,7 @@ def buildApp(){
     echo "building application"
 }
 
-def buildApp(){
+def deployApp(){
     echo "deploying application..."
     echo "deploying version ${params.version}"
 }
