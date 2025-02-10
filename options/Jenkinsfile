@@ -20,19 +20,4 @@ pipeline {
         }
 
     }
-
-    post {
-        always {
-            echo 'Cleanup after everything!'
-        }
-
-        success {
-            echo "Pipeline succeeded"
-        }
-
-        failure {
-            echo "Pipeline failed"
-        }
-
-    }
 }
