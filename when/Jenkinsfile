@@ -1,0 +1,37 @@
+// pipeline {
+//     agent any
+//     environment{
+//         abc = "HELLO"
+//     }
+//     stages {
+//         stage('one') {
+//             when {
+//                 environment name: 'abc', value : 'HELLO'
+//             }
+//             steps {
+//                 echo 'HELLO there!!'
+//             }
+//         }
+//     }
+// }
+
+pipeline {
+    agent any
+    environment{
+        abc = "HELLO"
+        efg = "HI"
+    }
+    stages {
+        stage('one') {
+            when {
+                anyOf{
+                    environment name: 'abc', value : 'HELLO'
+                    environment name: 'efg', value : 'KAMAL'
+                }
+            }
+            steps {
+                echo 'HELLO there!!'
+            }
+        }
+    }
+}
