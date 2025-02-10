@@ -8,6 +8,10 @@ pipeline {
     stages {
 
         stage('deploy') {
+            options{
+                retry(3)
+            }
+            
             steps {
                 error ("Error")
             }
