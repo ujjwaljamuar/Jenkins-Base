@@ -5,7 +5,7 @@ pipeline {
         name = "Ujjwal"
     }
     stages {
-        stage("Init") {
+        stage("if-else") {
             steps {
                 script {
                     if(env.name == "Ujjwal") {
@@ -13,6 +13,19 @@ pipeline {
                     }
                     else {
                         echo "Inside else block"
+                    }
+                }
+            }
+        }
+
+        stage("try-catch") {
+            steps {
+                script {
+                    try {
+                        error "ERROR!!"
+                    }
+                    catch(e){
+                        echo "Try-catch worked, pipeline should pass"
                     }
                 }
             }
