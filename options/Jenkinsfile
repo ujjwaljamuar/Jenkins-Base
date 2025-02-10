@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    options{
+        retry(3)
+    }
+
+    stages {
+
+        stage('deploy') {
+            steps {
+                error ("Error")
+            }
+        }
+        
+        stage('Release to prod') {
+            steps {
+                sh 'echo Releasing to prod'
+            }
+        }
+
+    }
+
+    post {
+        always {
+            echo 'Cleanup after everything!'
+        }
+
+        success {
+            echo "Pipeline succeeded"
+        }
+
+        failure {
+            echo "Pipeline failed"
+        }
+
+    }
+}
