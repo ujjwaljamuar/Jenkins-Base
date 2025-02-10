@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    environment {
+        name = "Ujjwal"
+    }
+    stages {
+        stage("Init") {
+            steps {
+                script {
+                    if(env.name == "Ujjwal") {
+                        echo "I am here"
+                    }
+                    else {
+                        echo "Inside else block"
+                    }
+                }
+            }
+        }
+    }
+}
